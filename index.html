@@ -8,71 +8,45 @@
 
     <body>
         <script>
-            const possibilities = ["rock", "paper", "scissors"]
+            const possibilities = ["Rock", "Paper", "Scissors"]
 
-            //randomly returns rock, paper or scissors
-            function computerPlay() {
-                const random = possibilities[Math.floor(Math.random() * 3)]
-                return random
-            }
-
-            let computerSelection = computerPlay() //computer's choice
+            let computerSelection = possibilities[Math.floor(Math.random() * 3)]; // computer's choice; Randomly chooses one within "possibilities[]" range
             let playerSelection //player's choice
 
             //prompt for player's choice, if the players chooses something besides the three options, it stays in the loop
             while (true) {
-                playerSelection = prompt("Rock, Paper or Scissors?")
-                if (playerSelection.toLowerCase() == "rock" || playerSelection.toLowerCase() == "paper" || playerSelection.toLowerCase() == "scissors") {
+                playerSelection = prompt("Rock, Paper or Scissors?").toLowerCase(); // Prompts, then lower cases the input 
+                if (playerSelection == "rock" || playerSelection == "paper" || playerSelection == "scissors") {
                    break;
                 }
                alert("Please, enter only one of the three options!")
             }
 
-            //making it case insensitive
-            if (playerSelection.toLowerCase() == "rock") {
-               playerSelection = "Rock";
-            }
-           else if (playerSelection.toLowerCase() == "paper") {
-               playerSelection = "Paper";
-            }
-           else if (playerSelection.toLowerCase() == "scissors") {
-               playerSelection = "Scissors";
-            }   
+            // making it case insensitive
+            playerSelection = 
+                playerSelection.charAt(0).toUpperCase() // Grabs the first character of the string, and Uppercases
+                + playerSelection.substring(1); // Substrings the 1st (2nd, actual) character to the last character
 
             function playOneRound(playerSelection, computerSelection) {
-                if (playerSelection == "Rock") {
-                    if (computerSelection == "Rock") {
-                        return "The result is a tie!";
-                    }
-                    else if (computerSelection == "Paper") {
-                        return "You lose! Paper beats Rock.";
-                    }
-                    else {
-                        return "You win! Rock beats scissors.";
-                    }
+                var won; // Boolean is won or not, which will serve to fill the blanks in return statement
+
+                if(playerSelection == computerSelection) return "The result is a tie!"; // If both options are the same
+
+                switch(playerSelection) {
+                    case 'Rock':
+                        won = (computerSelection == 'Scissors'); // Rock wins against Scissors
+                    break;
+                    case 'Paper':
+                        won = (computerSelection == 'Rock'); // Paper beats Rock
+                    break;
+                    case 'Scissors':
+                        won = (computerSelection == 'Paper'); // Scissors beats Paper
+                    break;
                 }
-                else if (playerSelection == "Paper") {
-                    if (computerSelection == "Paper") {
-                        return "The result is a tie!";
-                    }
-                    else if (computerSelection == "Rock") {
-                        return "You win! Paper beats Rock.";
-                    }
-                    else {
-                        return "You lose! Scissors beat Paper.";
-                    }
-                }
-                else if (playerSelection == "Scissors") {
-                    if (computerSelection == "Scissors") {
-                        return "The result is a tie!";
-                    }
-                    else if (computerSelection == "Paper") {
-                        return "You win! Scissors beat Paper.";
-                    }
-                    else {
-                        return "You lose! Rock beats Scissors.";
-                    }
-                }
+
+                return "You " + ((won)?"won! ":"lost! ") + 
+                ((won)? playerSelection: computerSelection) + " beats " + 
+                ((won)? computerSelection: playerSelection) + ".";
             }
 
             alert(playOneRound(playerSelection, computerSelection))
