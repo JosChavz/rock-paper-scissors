@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <title>Newland's Rock Paper Scissors</title>
+        <meta charset="UTF-8">
+    </head>
+
+    <body>
+        <script>
+            const possibilities = ["rock", "paper", "scissors"]
+
+            //randomly returns rock, paper or scissors
+            function computerPlay() {
+                return possibilities[Math.floor(Math.random() * 3)]
+            }
+
+            function playOneRound(playerSelection, computerSelection) {
+                playerSelection = playerSelection.toLowerCase()
+                computerSelection = computerSelection.toLowerCase()
+
+
+                if (playerSelection == "rock" && computerSelection == "paper") {
+                    return "You lose, paper beats rock!"
+                } else if (playerSelection == "rock" && computerSelection == "scissors") {
+                    return "You win, rock beats scissors!"
+                } else {
+                    return "It's a tie!!"
+                }
+
+                if (playerSelection == "paper" && computerSelection == "rock") {
+                    return "You win, paper beats rock!"
+                } else if (playerSelection == "paper" && computerSelection == "scissors") {
+                    return "You lose, scissors beats paper!"
+                } else {
+                    return "It's a tie!!"
+                }
+
+                if (playerSelection == "scissors" && computerSelection == "paper") {
+                    return "You win, scissors beats paper!"
+                } else if (playerSelection == "scissors" && computerSelection == "rock") {
+                    return "You lose, rock beats scissors!"
+                } else {
+                    return "It's a tie!!"
+                }
+            }
+
+            function game() {
+                for (let i = 0; i < 5; i++) {
+                    console.log(playOneRound(prompt("Enter Rock, Paper or Scissors!"), computerPlay()))
+                }
+            }
+        </script>
+    </body>
+
+</html>
