@@ -12,14 +12,34 @@
 
             //randomly returns rock, paper or scissors
             function computerPlay() {
-                return possibilities[Math.floor(Math.random() * 3)]
+                const random = possibilities[Math.floor(Math.random() * 3)]
+                return random
             }
 
+            let computerSelection = computerPlay() //computer's choice
+            let playerSelection //player's choice
+
+            //prompt for player's choice, if the players chooses something besides the three options, it stays in the loop
+            while (true) {
+                playerSelection = prompt("Rock, Paper or Scissors?")
+                if (playerSelection.toLowerCase() == "rock" || playerSelection.toLowerCase() == "paper" || playerSelection.toLowerCase() == "scissors") {
+                   break;
+                }
+               alert("Please, enter only one of the three options!")
+            }
+
+            //making it case insensitive
+            if (playerSelection.toLowerCase() == "rock") {
+               playerSelection = "Rock";
+            }
+           else if (playerSelection.toLowerCase() == "paper") {
+               playerSelection = "Paper";
+            }
+           else if (playerSelection.toLowerCase() == "scissors") {
+               playerSelection = "Scissors";
+            }   
+
             function playOneRound(playerSelection, computerSelection) {
-                playerSelection = playerSelection.toLowerCase()
-                computerSelection = computerSelection.toLowerCase()
-
-
                 if (playerSelection == "rock" && computerSelection == "paper") {
                     return "You lose, paper beats rock!"
                 } else if (playerSelection == "rock" && computerSelection == "scissors") {
@@ -45,11 +65,7 @@
                 }
             }
 
-            function game() {
-                for (let i = 0; i < 5; i++) {
-                    console.log(playOneRound(prompt("Enter Rock, Paper or Scissors!"), computerPlay()))
-                }
-            }
+            console.log(playOneRound(playerSelection, computerSelection))
         </script>
     </body>
 
